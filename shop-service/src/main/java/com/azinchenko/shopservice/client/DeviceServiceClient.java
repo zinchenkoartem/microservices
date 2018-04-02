@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@FeignClient("device-service")
-//@Component
+@FeignClient(value = "device-service")
 public interface DeviceServiceClient {
 
-  @RequestMapping("/all")
+  @RequestMapping("/device-service/all")
   List<FullDevice> getAll();
 
-  @RequestMapping("/device/{id}")
+  @RequestMapping("/device-service/device/{id}")
   FullDevice get(@PathVariable("id") Long id);
 }

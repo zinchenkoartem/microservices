@@ -1,7 +1,6 @@
 buildscript {
 	ext {
 		springBootVersion = '2.0.0.RELEASE'
-//		springBootVersion = '1.5.10'
 	}
 	repositories {
 		mavenCentral()
@@ -31,15 +30,9 @@ ext {
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.cloud:spring-cloud-config-server')
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
-//	compile('org.springframework.cloud:spring-cloud-starter-netflix-zuul')
-//	compile('org.springframework.cloud:spring-cloud-starter-feign')
-	compile('org.springframework.cloud:spring-cloud-starter-openfeign')
-	runtime('org.springframework.boot:spring-boot-devtools')
-	compileOnly('org.projectlombok:lombok')
+	compile('org.springframework.cloud:spring-cloud-starter-netflix-zuul')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

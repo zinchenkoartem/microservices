@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/device-service")
 public class DeviceController {
 
   @Autowired

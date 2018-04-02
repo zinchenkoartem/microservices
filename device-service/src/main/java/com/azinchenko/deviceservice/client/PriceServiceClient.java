@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
 
-@FeignClient("price-service")
+@FeignClient(value = "price-service")
 public interface PriceServiceClient {
 
-  @RequestMapping("/prices")
+  @RequestMapping("/price-service/prices")
   Map<String,Double> getPrice();
 
 }

@@ -3,4 +3,5 @@ include 'device-service'
 include 'price-service'
 include 'shop-service'
 include 'discovery-service'
+include 'gateway-config-service'
 

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/price-service")
 public class PriceController {
 
   @RequestMapping("/prices")
