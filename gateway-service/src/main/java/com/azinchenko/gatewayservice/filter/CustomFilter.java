@@ -1,4 +1,4 @@
-package com.azinchenko.gatewayconfigservice.filter;
+package com.azinchenko.gatewayservice.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
