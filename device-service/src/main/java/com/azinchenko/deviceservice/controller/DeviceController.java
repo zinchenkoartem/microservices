@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/device-service")
 public class DeviceController {
 
+//  private static volatile boolean aBoolean= false;
+
   @Autowired
   private DeviceRepository repository;
 
@@ -33,15 +35,19 @@ public class DeviceController {
 
   @RequestMapping("/all")
   public List<FullDevice> getAll() {
-    System.out.println("++++++++device-service is called!!!!!!!!!");
-    System.out.println("multiplier is: " + multiplier);
-    Map<String, Double> prices = priceServiceClient.getPrice();
-    List<Device> devices = repository.findAll();
-    return devices.stream().map(device -> {
-      String name = device.getName();
-      prices.get(name);
-      return new FullDevice(name, prices.get(name) * multiplier);
-    }).collect(Collectors.toList());
+
+      System.out.println("++++++++device-service is called!!!!!!!!!");
+      System.out.println("multiplier is: " + multiplier);
+      Map<String, Double> prices = priceServiceClient.getPrice();
+      List<Device> devices = repository.findAll();
+      return devices.stream().map(device -> {
+        String name = device.getName();
+        prices.get(name);
+        return new FullDevice(name, prices.get(name) * multiplier);
+      }).collect(Collectors.toList());
+
+//      throw new RuntimeException("New Exception for Hystrix");
+
   }
 
   @RequestMapping(value = "/device/{id}", method = RequestMethod.GET)
