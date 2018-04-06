@@ -6,6 +6,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class ShopDeviceController {
   @Autowired
   private DeviceServiceClient deviceServiceClient;
 
-  @RequestMapping("/devices")
+  @RequestMapping(value = "/devices", method = RequestMethod.GET)
   @HystrixCommand(fallbackMethod = "fallbackDefaultMethod")
   public List<FullDevice> devices() {
     System.out.println("!!!!!!!!!shop-servise is called!!!!!!!!!");
@@ -31,7 +32,7 @@ public class ShopDeviceController {
     return fullDevices;
   }
 
-  @RequestMapping("/device/{id}")
+  @RequestMapping(value = "/device/{id}", method = RequestMethod.GET)
   public FullDevice device(@PathVariable("id") Long id) {
     return deviceServiceClient.get(id);
   }
