@@ -46,7 +46,7 @@ public class DeviceController {
         return new FullDevice(name, prices.get(name) * multiplier);
       }).collect(Collectors.toList());
 
-//      throw new RuntimeException("New Exception for Hystrix");
+      throw new RuntimeException("New Exception for Hystrix");
 
   }
 
