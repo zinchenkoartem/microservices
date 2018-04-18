@@ -1,18 +1,23 @@
 version: '2.1'
 services:
   config-service:
+    environment:
+      DISCOVERY_SERVICE_URL: http://10.23.9.122:8762/eureka
     build:
       context: ./config-service
     ports:
       - 8888:8888
 
   discovery-service:
+    environment:
+      CONFIG_SERVICE_URL: http://10.23.9.122:8888
     build:
       context: ./discovery-service
     depends_on:
       - config-service
     ports:
       - 8762:8762
+
 
   gateway-service:
     build:
