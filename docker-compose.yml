@@ -14,7 +14,8 @@ services:
     build:
       context: ./discovery-service
     depends_on:
-      - config-service
+      config-service:
+        condition: service_started
     ports:
       - 8762:8762
 
