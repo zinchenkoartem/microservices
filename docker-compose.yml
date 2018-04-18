@@ -1,0 +1,46 @@
+version: '2.1'
+services:
+  config-service:
+    build:
+      context: ./config-service
+    ports:
+      - 8888:8888
+
+  discovery-service:
+    build:
+      context: ./discovery-service
+    depends_on:
+      - config-service
+    ports:
+      - 8762:8762
+
+  gateway-service:
+    build:
+      context: ./gateway-service
+    depends_on:
+      - config-service
+      - discovery-service
+    ports:
+      - 8080:8080
+
+  device-service:
+    build:
+      context: ./device-service
+    depends_on:
+      - config-service
+      - discovery-service
+
+  price-service:
+    build:
+      context: ./price-service
+    depends_on:
+      - config-service
+      - discovery-service
+
+  shop-service:
+    build:
+      context: ./shop-service
+    depends_on:
+      - config-service
+      - discovery-service
+
