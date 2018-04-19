@@ -1,31 +1,25 @@
 version: '2.1'
 services:
   config-service:
-    environment:
-      CONFIG_SERVICE_URL: ${CONFIG_SERVICE_URL}
-      DISCOVERY_SERVICE_URL: ${DISCOVERY_SERVICE_URL}
+#    environment:
+#      CONFIG_SERVICE_URL: ${CONFIG_SERVICE_URL}
+#      DISCOVERY_SERVICE_URL: ${DISCOVERY_SERVICE_URL}
     build:
       context: ./config-service
-    ports:
-      - 8888:8888
+#    ports:
+#      - 8888:8888
 
   discovery-service:
-    environment:
-      CONFIG_SERVICE_URL: ${CONFIG_SERVICE_URL}
-      DISCOVERY_SERVICE_URL: ${DISCOVERY_SERVICE_URL}
     build:
       context: ./discovery-service
     depends_on:
       config-service:
         condition: service_healthy
-    ports:
-      - 8762:8762
+#    ports:
+#      - 8762:8762
 
 
   gateway-service:
-    environment:
-      CONFIG_SERVICE_URL: ${CONFIG_SERVICE_URL}
-      DISCOVERY_SERVICE_URL: ${DISCOVERY_SERVICE_URL}
     build:
       context: ./gateway-service
     depends_on:
@@ -35,9 +29,6 @@ services:
       - 8080:8080
 
   device-service:
-    environment:
-      CONFIG_SERVICE_URL: ${CONFIG_SERVICE_URL}
-      DISCOVERY_SERVICE_URL: ${DISCOVERY_SERVICE_URL}
     build:
       context: ./device-service
     depends_on:
@@ -45,9 +36,6 @@ services:
         condition: service_healthy
 
   price-service:
-    environment:
-      CONFIG_SERVICE_URL: ${CONFIG_SERVICE_URL}
-      DISCOVERY_SERVICE_URL: ${DISCOVERY_SERVICE_URL}
     build:
       context: ./price-service
     depends_on:
@@ -55,9 +43,6 @@ services:
         condition: service_healthy
 
   shop-service:
-    environment:
-      CONFIG_SERVICE_URL: ${CONFIG_SERVICE_URL}
-      DISCOVERY_SERVICE_URL: ${DISCOVERY_SERVICE_URL}
     build:
       context: ./shop-service
     depends_on:
