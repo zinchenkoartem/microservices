@@ -1,0 +1,53 @@
+version: '2.1'
+services:
+  config-service:
+#    environment:
+#      CONFIG_SERVICE_URL: ${CONFIG_SERVICE_URL}
+#      DISCOVERY_SERVICE_URL: ${DISCOVERY_SERVICE_URL}
+    build:
+      context: ./config-service
+#    ports:
+#      - 8888:8888
+
+  discovery-service:
+    build:
+      context: ./discovery-service
+    depends_on:
+      config-service:
+        condition: service_healthy
+#    ports:
+#      - 8762:8762
+
+
+  gateway-service:
+    build:
+      context: ./gateway-service
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    ports:
+      - 8080:8081
+
+  device-service:
+    build:
+      context: ./device-service
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+
+  price-service:
+    build:
+      context: ./price-service
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+
+  shop-service:
+    build:
+      context: ./shop-service
+      dockerfile: Dockerfile_dev
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    ports:
+      - 5005:5005
