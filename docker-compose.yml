@@ -2,7 +2,8 @@ version: '2.1'
 services:
   config-service:
     environment:
-      DISCOVERY_SERVICE_URL: http://10.23.9.122:8762/eureka
+      &CONFIG_SERVICE_URL: http://10.23.9.122:8888
+      &DISCOVERY_SERVICE_URL: http://10.23.9.122:8762/eureka
     build:
       context: ./config-service
     ports:
@@ -10,44 +11,55 @@ services:
 
   discovery-service:
     environment:
-      CONFIG_SERVICE_URL: http://10.23.9.122:8888
-      DISCOVERY_SERVICE_URL: http://10.23.9.122:8762/eureka
+      CONFIG_SERVICE_URL: *CONFIG_SERVICE_URL
+      DISCOVERY_SERVICE_URL: *DISCOVERY_SERVICE_URL
     build:
       context: ./discovery-service
     depends_on:
       config-service:
-        condition: service_started
+        condition: service_healthy
     ports:
       - 8762:8762
 
 
   gateway-service:
+    environment:
+      CONFIG_SERVICE_URL: *CONFIG_SERVICE_URL
+      DISCOVERY_SERVICE_URL: *DISCOVERY_SERVICE_URL
     build:
       context: ./gateway-service
     depends_on:
-      - config-service
-      - discovery-service
+      discovery-service:
+        condition: service_healthy
     ports:
       - 8080:8080
 
   device-service:
+    environment:
+      CONFIG_SERVICE_URL: *CONFIG_SERVICE_URL
+      DISCOVERY_SERVICE_URL: *DISCOVERY_SERVICE_URL
     build:
       context: ./device-service
     depends_on:
-      - config-service
-      - discovery-service
+      discovery-service:
+        condition: service_healthy
 
   price-service:
+    environment:
+      CONFIG_SERVICE_URL: *CONFIG_SERVICE_URL
+      DISCOVERY_SERVICE_URL: *DISCOVERY_SERVICE_URL
     build:
       context: ./price-service
     depends_on:
-      - config-service
-      - discovery-service
+      discovery-service:
+        condition: service_healthy
 
   shop-service:
+    environment:
+      CONFIG_SERVICE_URL: *CONFIG_SERVICE_URL
+      DISCOVERY_SERVICE_URL: *DISCOVERY_SERVICE_URL
     build:
       context: ./shop-service
     depends_on:
-      - config-service
-      - discovery-service
-
+      discovery-service:
+        condition: service_healthy
