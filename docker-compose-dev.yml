@@ -2,7 +2,7 @@ version: '2.1'
 services:
   config-service:
     environment:
-      CONFIG_PATH: ${CONFIG_PATH}
+      CONFIG_PATH: config-files
     build:
       context: ./config-service
     ports:
