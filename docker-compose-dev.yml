@@ -1,0 +1,55 @@
+version: '2.1'
+services:
+  config-service:
+    environment:
+      CONFIG_PATH: ${CONFIG_PATH}
+    build:
+      context: ./config-service
+    ports:
+      - 8888:8888
+
+  discovery-service:
+    build:
+      context: ./discovery-service
+    depends_on:
+      config-service:
+        condition: service_healthy
+    ports:
+      - 8762:8762
+
+
+  gateway-service:
+    build:
+      context: ./gateway-service
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+
+  device-service:
+    build:
+      context: ./device-service
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    ports:
+      - 8082:8082
+
+  price-service:
+    build:
+      context: ./price-service
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    ports:
+      - 8083:8083
+
+  shop-service:
+    build:
+      context: ./shop-service
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    ports:
+      - 8081:8081
