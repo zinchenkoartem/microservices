@@ -30,6 +30,7 @@ services:
   device-service:
     build:
       context: ./device-service
+      dockerfile: Dockerfile_dev
     depends_on:
       discovery-service:
         condition: service_healthy
@@ -39,6 +40,7 @@ services:
   price-service:
     build:
       context: ./price-service
+      dockerfile: Dockerfile_dev
     depends_on:
       discovery-service:
         condition: service_healthy
@@ -48,6 +50,7 @@ services:
   shop-service:
     build:
       context: ./shop-service
+      dockerfile: Dockerfile_dev
     depends_on:
       discovery-service:
         condition: service_healthy
