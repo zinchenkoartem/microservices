@@ -1,4 +1,4 @@
-package com.azinchenko.priceservice;
+package com.azinchenko.monitor;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

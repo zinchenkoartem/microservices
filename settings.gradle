@@ -5,4 +5,5 @@ include 'shop-service'
 include 'discovery-service'
 include 'gateway-service'
 include 'config-service'
+include 'monitor-service'
 
