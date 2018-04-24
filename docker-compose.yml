@@ -12,7 +12,7 @@ services:
 
   config-service:
     environment:
-      CONFIG_PATH: config-files-dev
+      CONFIG_PATH: config-filesdo
 #      CONFIG_SERVICE_URL: ${CONFIG_SERVICE_URL}
 #      DISCOVERY_SERVICE_URL: ${DISCOVERY_SERVICE_URL}
     build:
