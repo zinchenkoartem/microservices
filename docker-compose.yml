@@ -92,7 +92,7 @@ services:
       discovery-service:
         condition: service_healthy
     ports:
-      - 8080:9000
+      - 9000:9000
       - 8989:8989
 #    logging:
 #      options:
