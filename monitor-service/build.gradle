@@ -35,12 +35,12 @@ ext {
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile group: 'org.springframework.hateoas', name: 'spring-hateoas', version: '0.24.0.RELEASE'
-	compile('org.springframework.boot:spring-boot-starter-web')
+//	compile('org.springframework.boot:spring-boot-starter-actuator')
+//	compile group: 'org.springframework.hateoas', name: 'spring-hateoas', version: '0.24.0.RELEASE'
+//	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.cloud:spring-cloud-starter-config')
 //	compile('org.springframework.cloud:spring-cloud-starter')
-	runtime group: 'io.reactivex', name: 'rxnetty', version: '0.4.20'
+//	runtime group: 'io.reactivex', name: 'rxnetty', version: '0.4.20'
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
 //	compile('org.springframework.cloud:spring-cloud-starter-eureka')
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-turbine-stream')
