@@ -1,6 +1,7 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.RELEASE'
+//		springBootVersion = '2.0.0.RELEASE'
+		springBootVersion = '1.5.10.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -27,7 +28,8 @@ repositories {
 
 ext {
 //	springCloudVersion = 'Finchley.M9'
-	springCloudVersion = 'Edgware.SR1'
+//	springCloudVersion = 'Edgware.SR1'
+	springCloudVersion = 'Dalston.SR5'
 }
 
 dependencies {
@@ -36,9 +38,12 @@ dependencies {
 	compile('org.springframework.cloud:spring-cloud-starter-config')
 //	compile('org.springframework.cloud:spring-cloud-starter')
 	runtime group: 'io.reactivex', name: 'rxnetty', version: '0.4.20'
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-turbine-stream')
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard')
+//	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+	compile('org.springframework.cloud:spring-cloud-starter-eureka')
+//	compile('org.springframework.cloud:spring-cloud-starter-netflix-turbine-stream')
+	compile('org.springframework.cloud:spring-cloud-starter-turbine-stream')
+//	compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard')
+	compile('org.springframework.cloud:spring-cloud-starter-hystrix-dashboard')
 	compile('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
