@@ -85,7 +85,7 @@ services:
 #        max-file: "10"
 
 
-  monitoring:
+  monitor:
     build:
       context: ./monitor-service
     depends_on:
