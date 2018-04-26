@@ -17,8 +17,8 @@ services:
 #      DISCOVERY_SERVICE_URL: ${DISCOVERY_SERVICE_URL}
     build:
       context: ./config-service
-#    ports:
-#      - 8888:8888
+    ports:
+      - 8888:8888
 #    logging:
 #      options:
 #        max-size: "10m"
