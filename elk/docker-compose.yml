@@ -1,9 +1,9 @@
 elasticsearch:
    image: elasticsearch:2.2
    restart: always
-   log_opt:
-      max-size: "10m"
-      max-file: "10"
+#   log_opt:
+#      max-size: "10m"
+#      max-file: "10"
    ports:
       - 9200:9200
    volumes:
@@ -18,6 +18,8 @@ logstash:
    command: logstash -f /config-dir/logstash.conf
    ports:
      - 5044:5044
+     - 5672:5672
+     - 5671:5671
    links:
      - elasticsearch
 
