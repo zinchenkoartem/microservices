@@ -13,13 +13,7 @@
               class="org.springframework.amqp.rabbit.logback.AmqpAppender">
         <layout>
             <pattern>
-                {
-                "time": "%date{ISO8601}",
-                "thread": "%thread",
-                "level": "%level",
-                "class": "%logger{36}",
-                "message": "%message"
-                }
+                %level, %date{ISO8601}, %thread, %logger{36}, %message
             </pattern>
         </layout>
 
