@@ -19,7 +19,7 @@
 
         <!-- RabbitMQ connection -->
         <!--<host>10.23.9.122</host>-->
-        <host>${spring.rabbitmq.host}</host>
+        <host>rabbitmq</host>
         <port>5672</port>
         <username>guest</username>
         <password>guest</password>
