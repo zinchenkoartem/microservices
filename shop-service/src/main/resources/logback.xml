@@ -19,7 +19,7 @@
 
         <!-- RabbitMQ connection -->
         <!--<host>10.23.9.122</host>-->
-        <host>rabbitmq</host>
+        <host>${spring.rabbitmq.host}</host>
         <port>5672</port>
         <username>guest</username>
         <password>guest</password>
@@ -27,7 +27,7 @@
         <applicationId>api-service-4</applicationId>
         <routingKeyPattern>api-service-4</routingKeyPattern>
         <declareExchange>true</declareExchange>
-        <exchangeType>direct</exchangeType>
+        <exchangeType>topic</exchangeType>
         <exchangeName>ex_logstash</exchangeName>
 
         <generateId>true</generateId>
