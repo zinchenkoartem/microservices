@@ -87,16 +87,12 @@ services:
 #        max-file: "10"
 
 
-#  monitor-service:
-#    build:
-#      context: ./monitor-service
-#    depends_on:
-#      discovery-service:
-#        condition: service_healthy
-#    ports:
-#      - 8080:8080
-#      - 8989:8989
-#    logging:
-#      options:
-#        max-size: "10m"
-#        max-file: "10"
+  monitor-service:
+    build:
+      context: ./monitor-service
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+      - 8989:8989
