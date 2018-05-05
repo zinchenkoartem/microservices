@@ -14,7 +14,7 @@ public class PriceController {
   public Map<String,Double> prices() {
     Map<String,Double> map = new HashMap<>();
     map.put("Android", 9000.05);
-    map.put("iPhone", 1000.05);
+    map.put("iPhone", 5555.55);
     map.put("MacBook", 1500.05);
     return map;
   }

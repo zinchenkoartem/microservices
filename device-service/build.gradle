@@ -1,15 +1,12 @@
 buildscript {
 	ext {
 		springBootVersion = '2.0.0.RELEASE'
-//		springBootVersion = '1.5.10.RELEASE'
 	}
 	repositories {
 		mavenCentral()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-//		classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
-//		classpath "io.spring.gradle:dependency-management-plugin:${springBootVersion}"
 	}
 }
 
@@ -30,7 +27,6 @@ repositories {
 
 ext {
 	springCloudVersion = 'Finchley.M9'
-//	springCloudVersion = 'Edgware.SR3'
 }
 
 dependencies {
@@ -48,7 +44,6 @@ dependencies {
 	runtime('com.h2database:h2')
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('org.springframework.security:spring-security-test')
 }
 
 dependencyManagement {

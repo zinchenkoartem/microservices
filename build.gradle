@@ -1,3 +1,61 @@
 group 'Microservices'
 version '1.0'
 
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.hidetake:gradle-ssh-plugin:2.9.0'
+    }
+}
+
+apply plugin: 'org.hidetake.ssh'
+apply plugin: 'java'
+
+ssh.settings {
+    fileTransfer = 'scp'
+}
+
+remotes {
+    webServer {
+        host = '192.168.1.185'
+        user = 'root'
+        password = 'root'
+//        identity = file('id_rsa')
+    }
+}
+def remoteFolderName = '~/proj'
+
+task deployToRemoteServer(dependsOn: build) {
+    doLast {
+        ssh.run {
+            session(remotes.webServer) {
+                println  "rootDir: " + rootDir
+                put from: '.', into: remoteFolderName, filter: { it.name =~ /.*SNAPSHOT.jar/ }
+                put from: '.', into: remoteFolderName, filter: { it.name =~ /Dockerfile.*/ }
+                put from: './elk' , into: remoteFolderName
+                put from: '.', into: remoteFolderName, filter: { it.name =~ /docker-compose.*/ }
+                execute "cd ${remoteFolderName} && docker-compose up -d --build"
+            }
+        }
+    }
+}
+
+task stopAndRedeploy {
+    doLast {
+        ssh.run {
+            session(remotes.webServer) {
+//                put from: 'clean.sh', into: '~/'
+//                execute 'chmod +x clean.sh'
+//                execute './clean.sh'
+                execute 'rm -rf proj/'
+                execute 'docker stop $(docker ps -a -q)'
+                execute 'docker rm -f $(docker ps -a -q)'
+                execute 'docker rmi $(docker images -q)'
+            }
+        }
+//        deployToRemoteServer.execute()
+    }
+}
