@@ -20,8 +20,8 @@ ssh.settings {
 
 remotes {
     dockerComposeServer {
-        host = '192.168.1.185'
-//        host = '10.23.9.122'
+//        host = '192.168.1.185'
+        host = '10.23.9.122'
         user = 'root'
         password = 'root'
 //        identity = file('id_rsa')
@@ -33,7 +33,7 @@ def remoteFolderName = '~/proj'
 subprojects { pr -> build.dependsOn("${pr.path}:build") }
 //evaluationDependsOnChildren()
 //task deployToRemoteServer(dependsOn: subprojects.build) {
-task deployToRemoteServer(dependsOn: build) {
+task deployToServer(dependsOn: build) {
     doLast {
         ssh.run {
             session(remotes.dockerComposeServer) {
@@ -42,6 +42,16 @@ task deployToRemoteServer(dependsOn: build) {
                 put from: '.', into: remoteFolderName, filter: { it.name =~ /Dockerfile.*/ }
                 put from: './elk' , into: remoteFolderName
                 put from: '.', into: remoteFolderName, filter: { it.name =~ /docker-compose.*/ }
+//                execute "cd ${remoteFolderName} && docker-compose up -d --build"
+            }
+        }
+    }
+}
+
+task runServer(dependsOn: deployToServer ) {
+    doLast {
+        ssh.run {
+            session(remotes.dockerComposeServer) {
                 execute "cd ${remoteFolderName} && docker-compose up -d --build"
             }
         }
@@ -65,4 +75,4 @@ task stopRemoteServer {
     }
 }
 
-task stopAndRedeploy(dependsOn: [stopRemoteServer, deployToRemoteServer])
+task stopAndRedeploy(dependsOn: [stopRemoteServer, deployToServer]) //TODO не правильная очередь выполенения
