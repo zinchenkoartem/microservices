@@ -19,8 +19,9 @@ ssh.settings {
 }
 
 remotes {
-    webServer {
-        host = '192.168.1.185'
+    dockerComposeServer {
+//        host = '192.168.1.185'
+        host = '10.23.9.122'
         user = 'root'
         password = 'root'
 //        identity = file('id_rsa')
@@ -28,10 +29,14 @@ remotes {
 }
 def remoteFolderName = '~/proj'
 
+//task buildAll
+subprojects { pr -> build.dependsOn("${pr.path}:build") }
+//evaluationDependsOnChildren()
+//task deployToRemoteServer(dependsOn: subprojects.build) {
 task deployToRemoteServer(dependsOn: build) {
     doLast {
         ssh.run {
-            session(remotes.webServer) {
+            session(remotes.dockerComposeServer) {
                 println  "rootDir: " + rootDir
                 put from: '.', into: remoteFolderName, filter: { it.name =~ /.*SNAPSHOT.jar/ }
                 put from: '.', into: remoteFolderName, filter: { it.name =~ /Dockerfile.*/ }
@@ -43,10 +48,10 @@ task deployToRemoteServer(dependsOn: build) {
     }
 }
 
-task stopAndRedeploy {
+task stopRemoteServer {
     doLast {
         ssh.run {
-            session(remotes.webServer) {
+            session(remotes.dockerComposeServer) {
 //                put from: 'clean.sh', into: '~/'
 //                execute 'chmod +x clean.sh'
 //                execute './clean.sh'
@@ -59,3 +64,5 @@ task stopAndRedeploy {
 //        deployToRemoteServer.execute()
     }
 }
+
+task stopAndRedeploy(dependsOn: [stopRemoteServer, deployToRemoteServer])
