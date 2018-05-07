@@ -20,8 +20,8 @@ ssh.settings {
 
 remotes {
     dockerComposeServer {
-//        host = '192.168.1.185'
-        host = '10.23.9.122'
+        host = '192.168.1.185'
+//        host = '10.23.9.122'
         user = 'root'
         password = 'root'
 //        identity = file('id_rsa')
