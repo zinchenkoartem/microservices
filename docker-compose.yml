@@ -7,10 +7,11 @@ services:
       - 15672:15672
       - 5672:5672
       - 5671:5671
-#    logging:
-#      options:
-#        max-size: "10m"
-#        max-file: "10"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
 
   config-service:
     environment:
@@ -21,10 +22,11 @@ services:
       context: ./config-service
     ports:
       - 8888:8888
-#    logging:
-#      options:
-#        max-size: "10m"
-#        max-file: "10"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
 
   discovery-service:
     build:
@@ -34,10 +36,11 @@ services:
         condition: service_healthy
     ports:
       - 8762:8762
-#    logging:
-#      options:
-#        max-size: "10m"
-#        max-file: "10"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
 
 
   gateway-service:
@@ -48,10 +51,11 @@ services:
         condition: service_healthy
     ports:
       - 8081:8081
-#    logging:
-#      options:
-#        max-size: "10m"
-#        max-file: "10"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
 
   device-service:
     build:
@@ -59,10 +63,11 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-#    logging:
-#      options:
-#        max-size: "10m"
-#        max-file: "10"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
 
   price-service:
     build:
@@ -70,10 +75,11 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-#    logging:
-#      options:
-#        max-size: "10m"
-#        max-file: "10"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
 
   shop-service:
     build:
@@ -81,10 +87,11 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-#    logging:
-#      options:
-#        max-size: "10m"
-#        max-file: "10"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
 
 
   monitor-service:
@@ -96,3 +103,8 @@ services:
     ports:
       - 8080:8080
       - 8989:8989
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
