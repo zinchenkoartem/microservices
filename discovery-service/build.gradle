@@ -46,3 +46,10 @@ dependencyManagement {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }
+
+docker {
+	dependsOn build
+	name '10.23.10.163/discoveryService'
+	tags 'latest'
+}
+
