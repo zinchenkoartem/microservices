@@ -49,7 +49,7 @@ dependencyManagement {
 
 docker {
 	dependsOn build
-	name '10.23.10.163/discoveryService'
+	name '10.23.10.163:5000/discoveryService'
 	tags 'latest'
 }
 
