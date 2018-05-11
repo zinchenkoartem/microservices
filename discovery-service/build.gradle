@@ -50,6 +50,7 @@ dependencyManagement {
 docker {
 	dependsOn build
 	name '10.23.10.163:5000/discovery-service_my'
+	files jar
 	tags 'latest'
 }
 
