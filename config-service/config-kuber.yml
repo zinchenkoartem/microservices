@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-sevice-deployment
+spec:
+  selector:
+    matchLabels:
+      app: config-service-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: config-service-app
+    spec:
+      containers:
+        - name: config-service-app
+          livenessProbe:
+            exec:
+              command:
+                - 'curl -f http://localhost:8888/actuator'
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          image: 192.168.1.252:5000/config-service-image:latest
+          ports:
+            - containerPort: 8888
+              name: server
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: config-service-app
+spec:
+  ports:
+  - port: 8888
+    targetPort: 8888
+    name: http
+  selector:
+    app: config-service-app
+  type: NodePort
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: testapp-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /config-service
+        backend:
+          serviceName: config-service-app
+          servicePort: 8888

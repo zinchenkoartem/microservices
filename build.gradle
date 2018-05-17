@@ -32,7 +32,8 @@ ssh.settings {
 remotes {
     dockerComposeServer {
 //        host = '192.168.1.185'
-        host = '10.23.9.122'
+//        host = '10.23.9.122'
+        host = '192.168.1.252' //kuber master machine
         user = 'root'
         password = 'root'
 //        identity = file('id_rsa')
@@ -53,6 +54,7 @@ task deployToServer(dependsOn: build) {
                 println  "rootDir: " + rootDir
                 put from: '.', into: remoteFolderName, filter: { it.name =~ /.*SNAPSHOT.jar/ }
                 put from: '.', into: remoteFolderName, filter: { it.name =~ /Dockerfile.*/ }
+                put from: '.', into: remoteFolderName, filter: { it.name =~ /config-kuber.yml/ }
                 put from: './elk' , into: remoteFolderName
                 put from: '.', into: remoteFolderName, filter: { it.name =~ /docker-compose.*/ }
 //                execute "cd ${remoteFolderName} && docker-compose up -d --build"
